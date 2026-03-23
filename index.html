@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Portal | Ultra-Pro Systems</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+    
+    <div class="wrapper">
+        <header class="glass-header">
+            <div class="brand">
+                <div class="logo-box">
+                    <img src="ersit.jpg" alt="Portal Logo" class="custom-logo">
+                </div>
+                <span>CRUDS <b>SYSTEM</b></span>
+            </div>
+            <div class="header-info">
+                <div id="registryCount" class="count-badge">0 RECORDS</div>
+                <div id="clock" class="digital-clock">00:00:00</div>
+                <div class="status-tag"><span class="pulse-dot"></span> SECURE</div>
+            </div>
+        </header>
+
+        <section class="glass-card main-form">
+            <div class="form-row">
+                <div class="input-group">
+                    <label><i class="fa-solid fa-user-shield"></i> Full Name</label>
+                    <input type="text" id="studentName" placeholder="Operator Name" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label><i class="fa-solid fa-id-card"></i> Registry ID</label>
+                    <input type="text" id="studentID" placeholder="ID-2026-X" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label><i class="fa-solid fa-envelope-open-text"></i> Email Address</label>
+                    <input type="email" id="studentEmail" placeholder="network@elite.io" autocomplete="off">
+                </div>
+                <button class="btn-glow" id="actionBtn" onclick="triggerConfirm('save')">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Save Entry</span>
+                </button>
+            </div>
+        </section>
+
+        <div class="search-container">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="searchInput" onkeyup="filterData()" placeholder="Search registry by name, ID, or email...">
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><i class="fa-solid fa-id-badge"></i> Identity</th>
+                            <th><i class="fa-solid fa-fingerprint"></i> Reference</th>
+                            <th><i class="fa-solid fa-at"></i> Communication</th>
+                            <th style="text-align: right;"><i class="fa-solid fa-sliders"></i> Commands</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <h2 id="modalTitle">Security Access</h2>
+            <p id="modalDesc"></p>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeModal()">Dismiss</button>
+                <button id="modalConfirmBtn" class="btn-confirm">Authorize</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
