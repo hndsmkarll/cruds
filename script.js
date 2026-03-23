@@ -47,16 +47,13 @@ function animate() {
 initParticles(); animate();
 window.onresize = initParticles;
 
-// --- INITIAL RENDER ---
 renderTable();
 
-// --- SEARCH LOGIC ---
 function filterData() {
     const term = searchInput.value.toLowerCase();
     renderTable(term);
 }
 
-// --- CORE LOGIC ---
 setInterval(() => {
     const clock = document.getElementById('clock');
     if(clock) clock.innerText = new Date().toLocaleTimeString();
@@ -126,42 +123,23 @@ function prepareEdit(index) {
 }
 
 function renderTable(filterTerm = "") {
-    // Update Counter
     registryCount.innerText = `${students.length} RECORD${students.length !== 1 ? 'S' : ''}`;
-
     const filtered = students.filter(s => 
         s.name.toLowerCase().includes(filterTerm) || 
         s.id.toLowerCase().includes(filterTerm) || 
         s.email.toLowerCase().includes(filterTerm)
     );
 
-    // Case 1: No data has been input yet
     if (students.length === 0) {
-        tableBody.innerHTML = `
-            <tr>
-                <td colspan="4" class="empty-state">
-                    <i class="fa-solid fa-database"></i>
-                    Registry is currently offline. Input data to begin session.
-                </td>
-            </tr>
-        `;
+        tableBody.innerHTML = `<tr><td colspan="4" class="empty-state"><i class="fa-solid fa-database"></i>Registry is currently offline.</td></tr>`;
         return;
     }
 
-    // Case 2: Data exists but search returned nothing
     if (filtered.length === 0) {
-        tableBody.innerHTML = `
-            <tr>
-                <td colspan="4" class="empty-state">
-                    <i class="fa-solid fa-magnifying-glass-chart"></i>
-                    No matching records found for "${filterTerm}".
-                </td>
-            </tr>
-        `;
+        tableBody.innerHTML = `<tr><td colspan="4" class="empty-state"><i class="fa-solid fa-magnifying-glass-chart"></i>No results for "${filterTerm}".</td></tr>`;
         return;
     }
 
-    // Case 3: Display the data
     tableBody.innerHTML = filtered.map((s) => {
         const originalIndex = students.indexOf(s);
         return `
