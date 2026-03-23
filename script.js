@@ -124,7 +124,7 @@ function executeSave() {
         showToast("Record Updated", "success");
     } else {
         students.push(data);
-        showToast("Access Authorized", "success");
+        showToast("Successfully Added", "success");
     }
 
     closeModal();
