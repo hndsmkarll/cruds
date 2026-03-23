@@ -61,11 +61,38 @@ setInterval(() => {
 
 function triggerConfirm(action, index = null) {
     if (action === 'save') {
-        if (!nameIn.value.trim() || !idIn.value.trim() || !emailIn.value.trim()) {
+        const nameVal = nameIn.value.trim();
+        const idVal = idIn.value.trim();
+        const emailVal = emailIn.value.trim();
+
+        // 1. Check for Empty Fields
+        if (!nameVal || !idVal || !emailVal) {
             showToast("Required: Complete all fields", "danger");
             return;
         }
+
+        // 2. Validate Operator Name (Letters and Spaces only)
+        const nameRegex = /^[A-Za-z\s]+$/;
+        if (!nameRegex.test(nameVal)) {
+            showToast("Error: Name must only contain letters", "danger");
+            return;
+        }
+
+        // 3. Validate Registry ID (Numbers and Dashes only)
+        const idRegex = /^[0-9-]+$/;
+        if (!idRegex.test(idVal)) {
+            showToast("Error: ID must only contain numbers", "danger");
+            return;
+        }
+
+        // 4. Validate Email (Must be a valid email format)
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailVal)) {
+            showToast("Invalid: Use a valid email address", "danger");
+            return;
+        }
     }
+
     const title = document.getElementById('modalTitle');
     const desc = document.getElementById('modalDesc');
     const confirmBtn = document.getElementById('modalConfirmBtn');
